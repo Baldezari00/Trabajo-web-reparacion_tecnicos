@@ -1394,7 +1394,7 @@ img {
     padding: 16px 24px;
     border-radius: 12px;
     box-shadow: var(--shadow-xl);
-    z-index: 9999;
+    z-index: 99999;
     font-weight: 600;
     transition: transform 0.4s ease;
     max-width: 90%;
@@ -1719,4 +1719,39 @@ img {
     }
 }
 
+/* ========================================
+   ADMIN FORM BUTTONS - FIX RESPONSIVE
+   ======================================== */
+
+.admin-form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Fix para móviles - los botones se apilan verticalmente */
+@media (max-width: 768px) {
+    .admin-form-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .admin-form-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* Fix adicional para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .admin-form-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .admin-form-buttons .btn {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
 

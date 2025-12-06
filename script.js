@@ -290,11 +290,16 @@ function savePrice() {
     const id = document.getElementById('editPriceId').value;
     const service = document.getElementById('priceService').value.trim();
     const amount = document.getElementById('priceAmount').value;
-    const time = document.getElementById('priceTime').value.trim();
+    let time = document.getElementById('priceTime').value.trim();
     
     if (!service || !amount || !time) {
         showToast('⚠ Por favor completá todos los campos');
         return;
+    }
+    
+    // Agregar "hs" automáticamente si no lo tiene
+    if (!time.toLowerCase().includes('hs') && !time.toLowerCase().includes('hora') && !time.toLowerCase().includes('día')) {
+        time = time + 'hs';
     }
     
     const prices = JSON.parse(localStorage.getItem('prices') || '[]');
