@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio Técnico Profesional - Reparaciones en 24-48hs</title>
+    <meta name="description" content="Reparación de celulares, notebooks, electrodomésticos y aires acondicionados. Presupuesto sin cargo. Garantía 90 días. Atención 24/7.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- TOP BAR URGENCIA -->
+    <div class="top-bar-urgency">
+        <span class="urgency-icon">⚡</span>
+        <span>ATENCIÓN DE URGENCIAS 24/7</span>
+    </div>
+
+    <!-- HEADER STICKY -->
+    <header class="header" id="header">
+        <div class="container header-content">
+            <div class="logo">
+                <h1>TechRepair<span class="logo-dot">.</span>Pro</h1>
+            </div>
+            
+            <nav class="nav" id="nav">
+                <a href="#servicios">Servicios</a>
+                <a href="#marcas">Marcas</a>
+                <a href="#garantia">Garantía</a>
+                <a href="#precios">Precios</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-switcher" id="themeSwitcher" title="Cambiar tema">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                </button>
+                <a href="tel:+541112345678" class="btn btn-call">LLAMAR AHORA</a>
+                <a href="https://wa.me/541112345678?text=Hola,%20necesito%20reparar%20mi%20dispositivo" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="badge floating">Atendemos a domicilio</div>
+            
+            <h2 class="hero-title">REPARAMOS TU DISPOSITIVO HOY MISMO</h2>
+            <p class="hero-subtitle">Técnicos certificados • Garantía escrita • Presupuesto SIN CARGO</p>
+            
+            <div class="hero-usps">
+                <div class="usp">
+                    <div class="usp-icon">🔧</div>
+                    <span>Reparación en 24-48hs</span>
+                </div>
+                <div class="usp">
+                    <div class="usp-icon">✓</div>
+                    <span>Garantía 90 días</span>
+                </div>
+                <div class="usp">
+                    <div class="usp-icon">💰</div>
+                    <span>Presupuesto GRATIS</span>
+                </div>
+            </div>
+
+            <div class="hero-ctas">
+                <a href="tel:+541112345678" class="btn btn-primary btn-large">LLAMAR AHORA</a>
+                <button class="btn btn-secondary btn-large" onclick="document.getElementById('presupuesto').scrollIntoView({behavior: 'smooth'})">Pedir Presupuesto</button>
+            </div>
+
+            <div class="timer-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+                <span>Respondemos en menos de 1 hora</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULARIO RÁPIDO -->
+    <section class="quick-form" id="presupuesto">
+        <div class="container">
+            <div class="form-card">
+                <h3>CONSEGUÍ TU PRESUPUESTO EN 5 MINUTOS</h3>
+                <form class="quick-form-inline" id="quickForm">
+                    <select name="dispositivo" id="dispositivoSelect" required>
+                        <option value="">Tipo de dispositivo</option>
+                        <option value="Celular">Celular</option>
+                        <option value="Notebook">Notebook</option>
+                        <option value="PC">PC</option>
+                        <option value="Heladera">Heladera</option>
+                        <option value="Aire Acondicionado">Aire Acondicionado</option>
+                        <option value="Lavarropas">Lavarropas</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    
+                    <input type="text" id="dispositivoOtro" name="dispositivoOtro" placeholder="¿Qué dispositivo?" style="display: none;" class="otro-input">
+                    
+                    <select name="marca" id="marcaSelect" required>
+                        <option value="">Marca</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="iPhone">iPhone</option>
+                        <option value="Motorola">Motorola</option>
+                        <option value="HP">HP</option>
+                        <option value="Dell">Dell</option>
+                        <option value="Lenovo">Lenovo</option>
+                        <option value="LG">LG</option>
+                        <option value="Whirlpool">Whirlpool</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    
+                    <input type="text" id="marcaOtra" name="marcaOtra" placeholder="¿Qué marca?" style="display: none;" class="otro-input">
+                    
+                    <input type="text" name="problema" placeholder="Ej: pantalla rota, no enciende..." required>
+                    
+                    <input type="email" name="email" placeholder="Tu email" required>
+                    
+                    <button type="submit" class="btn btn-primary">ENVIAR</button>
+                </form>
+                <p class="form-footer">También podés llamarnos o escribirnos por WhatsApp</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS PRINCIPALES -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <h2 class="section-title">¿Qué Reparamos?</h2>
+            
+            <div class="services-grid" id="servicesGrid">
+                <!-- Se renderiza dinámicamente con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- MARCAS -->
+    <section class="brands" id="marcas">
+        <div class="container">
+            <h2 class="section-title">Trabajamos con Todas las Marcas</h2>
+            
+            <div class="brands-grid">
+                <div class="brand-item">Samsung</div>
+                <div class="brand-item">iPhone</div>
+                <div class="brand-item">Motorola</div>
+                <div class="brand-item">Xiaomi</div>
+                <div class="brand-item">LG</div>
+                <div class="brand-item">Huawei</div>
+                <div class="brand-item">HP</div>
+                <div class="brand-item">Dell</div>
+                <div class="brand-item">Lenovo</div>
+                <div class="brand-item">Asus</div>
+                <div class="brand-item">Acer</div>
+                <div class="brand-item">Whirlpool</div>
+                <div class="brand-item">Philco</div>
+                <div class="brand-item">BGH</div>
+                <div class="brand-item">Drean</div>
+                <div class="brand-item">Patrick</div>
+                <div class="brand-item">Sony</div>
+                <div class="brand-item">Noblex</div>
+            </div>
+            
+            <p class="brands-footer">¿Tu marca no está? Igual trabajamos con ella. Consultanos.</p>
+        </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Cómo Funciona</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h3>CONTACTANOS</h3>
+                        <p>Llamá, escribí por WhatsApp o completá el formulario</p>
+                        <span class="timeline-badge">Te respondemos en menos de 1 hora</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h3>DIAGNÓSTICO</h3>
+                        <p>Evaluamos tu equipo sin cargo alguno</p>
+                        <span class="timeline-badge">Presupuesto detallado y transparente</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h3>REPARACIÓN</h3>
+                        <p>Autorizás y comenzamos la reparación</p>
+                        <span class="timeline-badge">24-48hs promedio - Te mantenemos informado</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h3>ENTREGA + GARANTÍA</h3>
+                        <p>Retirás tu equipo o te lo llevamos</p>
+                        <span class="timeline-badge">Garantía escrita 90 días + Factura</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRECIOS -->
+    <section class="pricing" id="precios">
+        <div class="container">
+            <h2 class="section-title">Precios Transparentes</h2>
+            
+            <div class="pricing-table-wrapper">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Precio Desde</th>
+                            <th>Tiempo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pricingTableBody">
+                        <!-- Se renderiza dinámicamente con JS -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pricing-note">
+                <p><strong>Presupuestos SIN CARGO.</strong> No cobramos visita ni revisión.</p>
+                <div class="payment-methods">
+                    <span class="badge-payment">Efectivo</span>
+                    <span class="badge-payment">Transferencia</span>
+                    <span class="badge-payment">Débito</span>
+                    <span class="badge-payment">Crédito</span>
+                    <span class="badge-payment">MercadoPago</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GARANTÍA -->
+    <section class="warranty" id="garantia">
+        <div class="container">
+            <div class="warranty-content">
+                <div class="warranty-icon">🛡️</div>
+                <h2>GARANTÍA DE 90 DÍAS</h2>
+                <ul class="warranty-list">
+                    <li>Todas nuestras reparaciones tienen 90 días de garantía escrita</li>
+                    <li>Si el mismo problema vuelve, lo arreglamos sin cargo</li>
+                    <li>Usamos repuestos de calidad certificada</li>
+                    <li>Entregamos factura y comprobante</li>
+                </ul>
+                <button class="btn btn-secondary">Ver términos de garantía</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- POR QUÉ ELEGIRNOS -->
+    <section class="why-us">
+        <div class="container">
+            <h2 class="section-title">Por Qué Elegirnos</h2>
+            
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="why-icon">⚡</div>
+                    <h3>RAPIDEZ</h3>
+                    <p>Mayoría de reparaciones realizadas en 24-48hs. Servicio express disponible.</p>
+                </div>
+                
+                <div class="why-item">
+                    <div class="why-icon">🏆</div>
+                    <h3>EXPERIENCIA</h3>
+                    <p>Más de 15 años en el rubro. Técnicos certificados y actualizados constantemente.</p>
+                </div>
+                
+                <div class="why-item">
+                    <div class="why-icon">💯</div>
+                    <h3>GARANTÍA</h3>
+                    <p>90 días de garantía escrita en todas las reparaciones. Tu tranquilidad asegurada.</p>
+                </div>
+                
+                <div class="why-item">
+                    <div class="why-icon">🚚</div>
+                    <h3>A DOMICILIO</h3>
+                    <p>Retiramos y entregamos sin cargo en Capital Federal y GBA zona norte.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- URGENCIAS -->
+    <section class="emergency">
+        <div class="container">
+            <div class="emergency-card">
+                <h2>¿NECESITÁS REPARACIÓN URGENTE?</h2>
+                <p class="emergency-subtitle">Servicio Express - Reparación en menos de 24hs</p>
+                
+                <div class="emergency-details">
+                    <div class="emergency-item">
+                        <span class="emergency-label">Adicional:</span>
+                        <span class="emergency-value">+30% del presupuesto</span>
+                    </div>
+                    <div class="emergency-item">
+                        <span class="emergency-label">Disponible para:</span>
+                        <span class="emergency-value">Celulares, Notebooks, Aires acondicionados</span>
+                    </div>
+                </div>
+                
+                <div class="emergency-actions">
+                    <a href="tel:+541112345678" class="btn btn-primary btn-large">LLAMAR AL (011) 1234-5678</a>
+                    <a href="https://wa.me/541112345678?text=Necesito%20reparación%20URGENTE" target="_blank" class="btn btn-whatsapp btn-large">WhatsApp Urgencias</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+            
+            <div class="testimonials-slider" id="testimonialsSlider">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Me repararon la pantalla del iPhone en el día. Excelente atención y precio justo. Los recomiendo 100%."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JP</div>
+                        <div>
+                            <div class="author-name">Juan Pérez</div>
+                            <div class="author-device">iPhone 12</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Llevé mi notebook que no encendía. La diagnosticaron gratis y la arreglaron en 2 días. Muy profesionales."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MG</div>
+                        <div>
+                            <div class="author-name">María González</div>
+                            <div class="author-device">HP Pavilion</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Excelente servicio. Me cargaron el gas del aire acondicionado y quedó funcionando perfecto. Muy recomendables."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CR</div>
+                        <div>
+                            <div class="author-name">Carlos Rodríguez</div>
+                            <div class="author-device">Aire Samsung</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cuánto demora una reparación?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>La mayoría de las reparaciones se completan en 24-48hs. Algunas reparaciones simples como cambio de batería pueden hacerse en el momento. Para reparaciones más complejas podemos demorar hasta 5 días hábiles.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cobran el presupuesto?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No, el presupuesto es completamente GRATIS. Tampoco cobramos la revisión técnica ni la visita a domicilio en nuestra zona de cobertura.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Qué garantía tienen?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Todas nuestras reparaciones incluyen 90 días de garantía escrita. Si el mismo problema vuelve a aparecer dentro de ese período, lo reparamos sin cargo adicional.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Usan repuestos originales?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Utilizamos repuestos de alta calidad certificados. Para algunas marcas trabajamos con repuestos originales, y para otras con alternativas de primera línea que cumplen los mismos estándares de calidad.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Vienen a domicilio?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, retiramos y entregamos sin cargo en Capital Federal y GBA zona norte. Para otras zonas consultá disponibilidad y costo adicional.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cómo puedo pagar?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Aceptamos efectivo, transferencia bancaria, débito, crédito (hasta 12 cuotas) y MercadoPago. El pago se realiza al momento de la entrega del equipo reparado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contactanos Ahora</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-method">
+                    <div class="contact-icon whatsapp-bg">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>Chateá con un técnico</p>
+                    <a href="https://wa.me/541112345678?text=Hola,%20necesito%20reparar%20mi%20dispositivo" target="_blank" class="btn btn-whatsapp">Enviar mensaje</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon phone-bg">📞</div>
+                    <h3>Teléfono</h3>
+                    <p>Llamanos de 9 a 20hs</p>
+                    <a href="tel:+541112345678" class="contact-phone">(011) 1234-5678</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon email-bg">✉️</div>
+                    <h3>Email</h3>
+                    <p>Respondemos en menos de 2hs</p>
+                    <a href="mailto:info@techrepair.com.ar" class="contact-email">info@techrepair.com.ar</a>
+                </div>
+            </div>
+            
+            <div class="contact-form-section">
+                <h3>Formulario de Contacto</h3>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <input type="text" name="nombre" placeholder="Nombre completo" required>
+                        <input type="tel" name="telefono" placeholder="Teléfono" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="email" name="email" placeholder="Email" required>
+                        <select name="dispositivo" id="dispositivoContactSelect" required>
+                            <option value="">Tipo de dispositivo</option>
+                            <option value="Celular">Celular</option>
+                            <option value="Notebook">Notebook</option>
+                            <option value="PC">PC</option>
+                            <option value="Electrodoméstico">Electrodoméstico</option>
+                            <option value="Aire Acondicionado">Aire Acondicionado</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <input type="text" id="dispositivoContactOtro" name="dispositivoContactOtro" placeholder="¿Qué dispositivo?" style="display: none;" class="otro-input-contact">
+                    <select name="marca" id="marcaContactSelect" required>
+                        <option value="">Marca</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="iPhone">iPhone</option>
+                        <option value="Motorola">Motorola</option>
+                        <option value="HP">HP</option>
+                        <option value="Dell">Dell</option>
+                        <option value="Lenovo">Lenovo</option>
+                        <option value="LG">LG</option>
+                        <option value="Whirlpool">Whirlpool</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="marcaContactOtra" name="marcaContactOtra" placeholder="¿Qué marca?" style="display: none;" class="otro-input-contact">
+                    <textarea name="problema" rows="4" placeholder="Contanos qué le pasa a tu equipo..." required></textarea>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="llamar">
+                        <span>Prefiero que me llamen</span>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-large">ENVIAR CONSULTA</button>
+                </form>
+            </div>
+            
+            <div class="location-section">
+                <h3>Ubicación del Taller</h3>
+                <div class="location-info">
+                    <div class="location-details">
+                        <p><strong>Dirección:</strong> Av. Corrientes 1234, CABA, Buenos Aires</p>
+                        <p><strong>Horarios:</strong> Lunes a Viernes 9:00-20:00hs | Sábados 9:00-14:00hs</p>
+                        <p><strong>Transporte:</strong> Colectivos: 24, 29, 39, 109, 152 | Subte: Línea B - Estación Callao</p>
+                        <p class="location-note">Podés traer tu equipo o pedimos que lo retiremos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>TechRepair<span class="logo-dot">.</span>Pro</h3>
+                    <p>Técnicos certificados desde 2010</p>
+                    <div class="trust-badges">
+                        <span class="trust-badge">✓ Técnicos Certificados</span>
+                        <span class="trust-badge">✓ Garantía 90 días</span>
+                        <span class="trust-badge">✓ +10.000 reparaciones</span>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Celulares y Tablets</a></li>
+                        <li><a href="#servicios">Notebooks y PCs</a></li>
+                        <li><a href="#servicios">Aires Acondicionados</a></li>
+                        <li><a href="#servicios">Electrodomésticos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:+541112345678">📞 (011) 1234-5678</a></li>
+                        <li><a href="https://wa.me/541112345678" target="_blank">💬 WhatsApp</a></li>
+                        <li><a href="mailto:info@techrepair.com.ar">✉️ info@techrepair.com.ar</a></li>
+                        <li>🕒 Lun-Vie 9-20hs | Sáb 9-14hs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p onclick="event.preventDefault(); openAdminLogin();" style="cursor: pointer;">&copy; 2025 TechRepair.Pro - Todos los derechos reservados | Servicio técnico autorizado</p>
+                <a href="#" class="footer-link">Términos de garantía</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING ACTION BUTTONS -->
+    <div class="fab-container">
+        <a href="https://wa.me/541112345678?text=Hola,%20necesito%20reparar%20mi%20dispositivo" target="_blank" class="fab fab-whatsapp" title="WhatsApp">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span class="fab-badge">1h</span>
+        </a>
+        
+        <a href="tel:+541112345678" class="fab fab-call" title="Llamar">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast"></div>
+
+    <!-- MODAL LOGIN ADMIN -->
+    <div id="adminLoginModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <h2>Acceso Administrador</h2>
+            <input type="password" id="adminPassword" placeholder="Contraseña" onkeypress="if(event.key === 'Enter') adminLogin()">
+            <div class="admin-modal-buttons">
+                <button onclick="adminLogin()" class="btn btn-primary">Ingresar</button>
+                <button onclick="closeAdminLogin()" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL ADMIN -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-panel-content">
+            <div class="admin-header">
+                <h2>Panel de Administración</h2>
+                <button onclick="closeAdminPanel()" class="btn-close">✕</button>
+            </div>
+            
+            <div class="admin-body">
+                <!-- GESTIÓN DE SERVICIOS -->
+                <div class="admin-section">
+                    <h3>Gestión de Servicios (¿Qué Reparamos?)</h3>
+                    
+                    <div class="admin-form">
+                        <input type="hidden" id="editServiceId">
+                        <input type="text" id="serviceName" placeholder="Nombre del Servicio (ej: CELULARES Y TABLETS)">
+                        <input type="text" id="serviceIcon" placeholder="Ícono (emoji, ej: 📱)">
+                        <textarea id="serviceItems" rows="4" placeholder="Items (uno por línea)&#10;Cambio de pantalla táctil&#10;Reemplazo de batería"></textarea>
+                        <input type="number" id="servicePrice" placeholder="Precio desde (número sin puntos)">
+                        <div class="admin-form-buttons">
+                            <button onclick="saveService()" class="btn btn-primary">Guardar Servicio</button>
+                            <button onclick="cancelEditService()" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-list" id="servicesList"></div>
+                </div>
+                
+                <!-- GESTIÓN DE PRECIOS -->
+                <div class="admin-section">
+                    <h3>Gestión de Tabla de Precios</h3>
+                    
+                    <div class="admin-form">
+                        <input type="hidden" id="editPriceId">
+                        <input type="text" id="priceService" placeholder="Nombre del Servicio">
+                        <input type="number" id="priceAmount" placeholder="Precio (número sin puntos)">
+                        <input type="text" id="priceTime" placeholder="Tiempo estimado (ej: 24hs)">
+                        <div class="admin-form-buttons">
+                            <button onclick="savePrice()" class="btn btn-primary">Guardar Precio</button>
+                            <button onclick="cancelEditPrice()" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-list" id="pricesList"></div>
+                </div>
+                
+                <!-- CAMBIAR CONTRASEÑA -->
+                <div class="admin-section">
+                    <h3>Cambiar Contraseña</h3>
+                    <div class="admin-form">
+                        <input type="password" id="newPassword" placeholder="Nueva contraseña (mínimo 6 caracteres)">
+                        <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+                        <button onclick="changePassword()" class="btn btn-primary">Cambiar Contraseña</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
