@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "service": "Reparación de pantalla TV",
+    "price": 20000,
+    "time": "24-48hs"
+  },
+  {
+    "id": 2,
+    "service": "Cambio de placa madre TV",
+    "price": 25000,
+    "time": "48hs"
+  },
+  {
+    "id": 3,
+    "service": "Reparación de magnetrón microondas",
+    "price": 15000,
+    "time": "24hs"
+  },
+  {
+    "id": 4,
+    "service": "Limpieza profunda microondas",
+    "price": 8000,
+    "time": "2-3hs"
+  },
+  {
+    "id": 5,
+    "service": "prueba",
+    "price": 3333,
+    "time": "33hs"
+  }
+]
