@@ -332,7 +332,6 @@ img {
     background: #EF4444;
     color: white;
 }
-
 /* ========================================
    HERO SECTION
    ======================================== */
@@ -341,21 +340,24 @@ img {
     min-height: 650px;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
     overflow: hidden;
 }
 
-.hero::before {
-    content: '';
+.hero-background {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-    opacity: 0.3;
+    background-image: url('./fondoHero.jpg'); /* Coloca tu imagen aquí */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
 }
+
+
 
 .hero-overlay {
     position: absolute;
@@ -363,12 +365,13 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+    background: linear-gradient(135deg, rgba(0, 40, 80, 0.676) 0%, rgba(0, 20, 40, 0.476) 100%);
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     padding: 80px 0;
 }
@@ -409,13 +412,14 @@ img {
     font-weight: 800;
     margin-bottom: 20px;
     line-height: 1.1;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
 }
 
 .hero-subtitle {
     font-size: 20px;
     margin-bottom: 40px;
     opacity: 0.95;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
 
 .hero-usps {
@@ -448,6 +452,7 @@ img {
 .usp span {
     font-weight: 600;
     font-size: 16px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
 .hero-ctas {
@@ -469,7 +474,6 @@ img {
     font-size: 14px;
     font-weight: 600;
 }
-
 /* ========================================
    FORMULARIO RÁPIDO
    ======================================== */
