@@ -1,6 +1,7 @@
 // ========================================
 // HASH DE CONTRASEÑA (SHA-256)
 // ========================================
+
 async function hashPassword(password) {
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
@@ -14,6 +15,13 @@ async function hashPassword(password) {
 // ========================================
 let servicesData = [];
 let pricesData = [];
+
+// Control de archivos editados
+let editedFiles = {
+    services: false,
+    prices: false
+};
+
 
 // Datos embebidos como respaldo
 const EMBEDDED_SERVICES = [
@@ -219,6 +227,9 @@ function closeAdminLogin() {
     document.getElementById('adminLoginModal').style.display = 'none';
 }
 
+
+
+
 // ========================================
 // ADMIN - LOGIN
 // ========================================
@@ -253,11 +264,142 @@ function openAdminPanel() {
 }
 
 function closeAdminPanel() {
+    // Preguntar si hay cambios sin enviar
+    if (editedFiles.services || editedFiles.prices) {
+        if (confirm('Hay cambios sin enviar. ¿Querés cerrar sin enviar?')) {
+            editedFiles.services = false;
+            editedFiles.prices = false;
+        } else {
+            return; // No cerrar
+        }
+    }
+    
     document.getElementById('adminPanel').style.display = 'none';
     cancelEditService();
     cancelEditPrice();
 }
 
+// ========================================
+// ADMIN - FINALIZAR EDICIÓN Y ENVIAR TODO
+// ========================================
+// ========================================
+// ADMIN - FINALIZAR EDICIÓN Y ENVIAR TODO
+// ========================================
+function finalizeEditing() {
+    // Verificar si hay archivos editados
+    if (!editedFiles.services && !editedFiles.prices) {
+        showToast('⚠ No hay cambios para enviar');
+        return;
+    }
+    
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+    `;
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+    `;
+    
+    // Determinar qué archivos se van a enviar
+    const filesToSend = [];
+    if (editedFiles.services) filesToSend.push('services.json');
+    if (editedFiles.prices) filesToSend.push('prices.json');
+    
+    modal.innerHTML = `
+        <h3 style="margin-bottom: 20px; color: #1f2937;">🎯 Finalizar edición</h3>
+        <p style="margin-bottom: 25px; color: #6b7280;">Se enviarán: ${filesToSend.join(' y ')}</p>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <button id="sendAllBtn" style="
+                padding: 15px;
+                background: #25D366;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                cursor: pointer;
+                font-weight: bold;
+            ">
+                📱 Enviar por WhatsApp
+            </button>
+            <button id="cancelFinalizeBtn" style="
+                padding: 15px;
+                background: #6b7280;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                cursor: pointer;
+                font-weight: bold;
+            ">
+                ❌ Cancelar
+            </button>
+        </div>
+    `;
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    // Botón Enviar
+    document.getElementById('sendAllBtn').addEventListener('click', () => {
+        const phoneNumber = '542235254889';
+        let message = '';
+        
+        // Solo incluir archivos editados
+        if (editedFiles.services) {
+            const servicesJson = JSON.stringify(servicesData, null, 2);
+            message += `services.json
+
+${servicesJson}`;
+        }
+        
+        if (editedFiles.prices) {
+            if (message) message += '\n\n━━━━━━━━━━━━━━━━\n\n';
+            const pricesJson = JSON.stringify(pricesData, null, 2);
+            message += `prices.json
+
+${pricesJson}`;
+        }
+        
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Resetear flags de edición
+        editedFiles.services = false;
+        editedFiles.prices = false;
+        
+        document.body.removeChild(overlay);
+        closeAdminPanel();
+        showToast('✓ Enviando cambios por WhatsApp...');
+    });
+    
+    // Botón Cancelar
+    document.getElementById('cancelFinalizeBtn').addEventListener('click', () => {
+        document.body.removeChild(overlay);
+    });
+    
+    // Cerrar al hacer click fuera
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            document.body.removeChild(overlay);
+        }
+    });
+}
 // ========================================
 // ADMIN - GESTIÓN DE SERVICIOS
 // ========================================
@@ -321,12 +463,12 @@ function saveService() {
         });
     }
     
+    editedFiles.services = true; // Marcar como editado
     showDataToSave('services', servicesData);
     renderAdminServices();
     renderServices();
     cancelEditService();
 }
-
 function editService(id) {
     const service = servicesData.find(s => s.id === id);
     
@@ -343,6 +485,7 @@ function editService(id) {
 function deleteService(id) {
     if (confirm('¿Estás seguro de eliminar este servicio?')) {
         servicesData = servicesData.filter(s => s.id !== id);
+        editedFiles.services = true; // Marcar como editado
         showDataToSave('services', servicesData);
         renderAdminServices();
         renderServices();
@@ -416,12 +559,12 @@ function savePrice() {
         });
     }
     
+    editedFiles.prices = true; // Marcar como editado
     showDataToSave('prices', pricesData);
     renderAdminPrices();
     renderPrices();
     cancelEditPrice();
 }
-
 function editPrice(id) {
     const price = pricesData.find(p => p.id === id);
     
@@ -433,10 +576,10 @@ function editPrice(id) {
         document.getElementById('priceService').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
-
 function deletePrice(id) {
     if (confirm('¿Estás seguro de eliminar este precio?')) {
         pricesData = pricesData.filter(p => p.id !== id);
+        editedFiles.prices = true; // Marcar como editado
         showDataToSave('prices', pricesData);
         renderAdminPrices();
         renderPrices();
@@ -466,14 +609,12 @@ function showDataToSave(type, data) {
 
 ¿Qué querés hacer?
 
-1️⃣ COPIAR JSON (para actualizarlo vos mismo en GitHub)
-2️⃣ ENVIAR POR WHATSAPP (te lo mandamos para que lo actualices)
+ENVIAR POR WHATSAPP
     `;
     
-    if (confirm(message.trim())) {
         // Mostrar opciones
         showWhatsAppOptions(fileName, jsonContent);
-    }
+    
 }
 
 function showWhatsAppOptions(fileName, jsonContent) {
@@ -502,9 +643,10 @@ function showWhatsAppOptions(fileName, jsonContent) {
     `;
     
     modal.innerHTML = `
-        <h3 style="margin-bottom: 20px; color: #1f2937;">¿Cómo querés proceder?</h3>
+        <h3 style="margin-bottom: 20px; color: #1f2937;">✓ Cambios guardados</h3>
+        <p style="margin-bottom: 25px; color: #6b7280;">¿Qué querés hacer?</p>
         <div style="display: flex; flex-direction: column; gap: 15px;">
-            <button id="copyBtn" style="
+            <button id="continueEditBtn" style="
                 padding: 15px;
                 background: #2563EB;
                 color: white;
@@ -512,9 +654,9 @@ function showWhatsAppOptions(fileName, jsonContent) {
                 border-radius: 8px;
                 font-size: 16px;
                 cursor: pointer;
-                transition: all 0.3s;
+                font-weight: bold;
             ">
-                📋 Copiar JSON al portapapeles
+                ✏️ Seguir Editando
             </button>
             <button id="whatsappBtn" style="
                 padding: 15px;
@@ -524,73 +666,53 @@ function showWhatsAppOptions(fileName, jsonContent) {
                 border-radius: 8px;
                 font-size: 16px;
                 cursor: pointer;
-                transition: all 0.3s;
+                font-weight: bold;
             ">
-                📱 Enviar por WhatsApp
-            </button>
-            <button id="cancelBtn" style="
-                padding: 15px;
-                background: #6b7280;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                font-size: 16px;
-                cursor: pointer;
-                transition: all 0.3s;
-            ">
-                ❌ Cancelar
+                📱 Enviar por WhatsApp y Terminar
             </button>
         </div>
     `;
     
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-    
-    // Botón copiar
-    document.getElementById('copyBtn').addEventListener('click', () => {
-        navigator.clipboard.writeText(jsonContent).then(() => {
-            showToast('✓ JSON copiado al portapapeles!');
-            document.body.removeChild(overlay);
-        }).catch(() => {
-            // Fallback: mostrar en textarea
-            const textarea = document.createElement('textarea');
-            textarea.value = jsonContent;
-            textarea.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:80%;z-index:999999;padding:20px;';
-            document.body.appendChild(textarea);
-            textarea.select();
-            showToast('Seleccioná todo y copiá (Ctrl+C)');
-            setTimeout(() => {
-                document.body.removeChild(textarea);
-                document.body.removeChild(overlay);
-            }, 5000);
-        });
+   
+    // Botón Seguir Editando
+    document.getElementById('continueEditBtn').addEventListener('click', () => {
+        document.body.removeChild(overlay);
+        showToast('✓ Continúa editando. Los cambios se guardan automáticamente.');
     });
     
-    // Botón WhatsApp
+    // Botón WhatsApp - HACE LO MISMO QUE "FINALIZAR Y ENVIAR TODO"
     document.getElementById('whatsappBtn').addEventListener('click', () => {
         const phoneNumber = '542235254889';
-        const message = `🔧 *ACTUALIZACIÓN DE DATOS - TechRepair.Pro*
+        let message = '';
+        
+        // Solo incluir archivos editados
+        if (editedFiles.services) {
+            const servicesJson = JSON.stringify(servicesData, null, 2);
+            message += `services.json
 
-📄 Archivo: ${fileName}
+${servicesJson}`;
+        }
+        
+        if (editedFiles.prices) {
+            if (message) message += '\n\n━━━━━━━━━━━━━━━━\n\n';
+            const pricesJson = JSON.stringify(pricesData, null, 2);
+            message += `prices.json
 
-Por favor, actualizá este archivo en GitHub con el siguiente contenido:
-
-\`\`\`json
-${jsonContent}
-\`\`\`
-
-Después de actualizar, esperá 1-2 minutos para que se actualice el hosting.`;
+${pricesJson}`;
+        }
         
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
         
+        // Resetear flags de edición
+        editedFiles.services = false;
+        editedFiles.prices = false;
+        
         document.body.removeChild(overlay);
-        showToast('✓ Abriendo WhatsApp...');
-    });
-    
-    // Botón cancelar
-    document.getElementById('cancelBtn').addEventListener('click', () => {
-        document.body.removeChild(overlay);
+        closeAdminPanel();
+        showToast('✓ Enviando cambios por WhatsApp...');
     });
     
     // Cerrar al hacer click fuera del modal
@@ -600,7 +722,6 @@ Después de actualizar, esperá 1-2 minutos para que se actualice el hosting.`;
         }
     });
 }
-
 // ========================================
 // ADMIN - CAMBIAR CONTRASEÑA
 // ========================================
