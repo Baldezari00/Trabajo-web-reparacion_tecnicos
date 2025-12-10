@@ -9,9 +9,8 @@ async function hashPassword(password) {
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     return hashHex;
 }
-
 // ========================================
-// CARGAR DATOS DESDE JSON O EMBEBIDOS
+// CARGAR DATOS DESDE JSON
 // ========================================
 let servicesData = [];
 let pricesData = [];
@@ -61,22 +60,41 @@ const EMBEDDED_PRICES = [
 ];
 
 async function loadData() {
+    const timestamp = Date.now();
+    
+    // Detectar si estamos en GitHub Pages o local
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = isGitHubPages ? '/Trabajo-web-reparacion_tecnicos/' : './';
+    
     try {
-        // Intentar cargar desde archivos JSON
+        console.log('🔍 Cargando desde:', basePath);
+        
+        const servicesUrl = `${basePath}data/services.json?t=${timestamp}`;
+        const pricesUrl = `${basePath}data/prices.json?t=${timestamp}`;
+        
+        console.log('📂 Services URL:', servicesUrl);
+        console.log('📂 Prices URL:', pricesUrl);
+        
         const [servicesResponse, pricesResponse] = await Promise.all([
-            fetch('./data/services.json?t=' + Date.now()),
-            fetch('./data/prices.json?t=' + Date.now())
+            fetch(servicesUrl),
+            fetch(pricesUrl)
         ]);
+        
+        console.log('📊 Services status:', servicesResponse.status);
+        console.log('📊 Prices status:', pricesResponse.status);
         
         if (servicesResponse.ok && pricesResponse.ok) {
             servicesData = await servicesResponse.json();
             pricesData = await pricesResponse.json();
             console.log('✅ Datos cargados desde JSON');
+            console.log('✅ Servicios:', servicesData.length);
+            console.log('✅ Precios:', pricesData.length);
         } else {
-            throw new Error('Archivos JSON no disponibles');
+            throw new Error(`Error HTTP: ${servicesResponse.status} / ${pricesResponse.status}`);
         }
     } catch (error) {
-        console.warn('⚠ Usando datos embebidos:', error.message);
+        console.warn('⚠️ No se pudieron cargar los JSON:', error.message);
+        console.log('📦 Usando datos embebidos');
         servicesData = EMBEDDED_SERVICES;
         pricesData = EMBEDDED_PRICES;
     } finally {
@@ -84,7 +102,6 @@ async function loadData() {
         renderPrices();
     }
 }
-
 // Datos por defecto si no se pueden cargar los JSON
 function getDefaultServices() {
     return [
