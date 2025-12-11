@@ -1,3 +1,4 @@
+
 [
   {
     "id": 1,
@@ -25,8 +26,8 @@
   },
   {
     "id": 5,
-    "service": "prueba",
-    "price": 3333,
-    "time": "33hs"
+    "service": "Reparación de entrada HDMI",
+    "price": 12500,
+    "time": "24hs"
   }
 ]
