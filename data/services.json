@@ -2,12 +2,11 @@
   {
     "id": 1,
     "name": "TELEVISORES",
-    "icon": "📺",
+    "icon": " ",
     "items": [
       "Reparación de pantalla",
       "Cambio de placa madre",
       "Reparación de fuente de alimentación",
-      "Configuración y sintonización",
       "Actualización de software",
       "Reparación de audio",
       "Cambio de backlight LED",
@@ -19,7 +18,7 @@
   {
     "id": 2,
     "name": "MICROONDAS",
-    "icon": "🔥",
+    "icon": " ",
     "items": [
       "Reparación de magnetrón",
       "Cambio de plato giratorio",
