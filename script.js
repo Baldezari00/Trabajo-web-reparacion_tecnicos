@@ -282,9 +282,6 @@ function closeAdminPanel() {
 // ========================================
 // ADMIN - FINALIZAR EDICIÓN Y ENVIAR TODO
 // ========================================
-// ========================================
-// ADMIN - FINALIZAR EDICIÓN Y ENVIAR TODO
-// ========================================
 function finalizeEditing() {
     // Verificar si hay archivos editados
     if (!editedFiles.services && !editedFiles.prices) {
@@ -374,6 +371,7 @@ ${servicesJson}`;
             message += `prices.json
 
 ${pricesJson}`;
+
         }
         
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
@@ -594,9 +592,7 @@ function cancelEditPrice() {
     document.getElementById('priceTime').value = '';
 }
 
-// ========================================
-// MOSTRAR DATOS PARA GUARDAR
-// ========================================
+
 // ========================================
 // MOSTRAR DATOS PARA GUARDAR Y ENVIAR POR WHATSAPP
 // ========================================
@@ -692,7 +688,8 @@ function showWhatsAppOptions(fileName, jsonContent) {
             const servicesJson = JSON.stringify(servicesData, null, 2);
             message += `services.json
 
-${servicesJson}`;
+${servicesJson}
+https://github.com/Baldezari00/Trabajo-web-reparacion_tecnicos/edit/main/data/services.json`;
         }
         
         if (editedFiles.prices) {
@@ -700,7 +697,8 @@ ${servicesJson}`;
             const pricesJson = JSON.stringify(pricesData, null, 2);
             message += `prices.json
 
-${pricesJson}`;
+${pricesJson}
+https://github.com/Baldezari00/Trabajo-web-reparacion_tecnicos/edit/main/data/prices.json`;
         }
         
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
